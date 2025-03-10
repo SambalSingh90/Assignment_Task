@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .slider-container {
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        .slider-container img {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <button class="btn prev" onclick="prevImage()">&#10094;</button>
+        <img id="slider-image" src="" alt="Slider Image">
+        <button class="btn next" onclick="nextImage()">&#10095;</button>
+    </div>
+
+    <script>
+        const images = [
+            "https://picsum.photos/400/250?random=1",
+            "https://picsum.photos/400/250?random=2",
+            "https://picsum.photos/400/250?random=3"
+        ];
+
+        let currentIndex = 0;
+        const sliderImage = document.getElementById("slider-image");
+
+        function showImage(index) {
+            if (index < 0) {
+                currentIndex = images.length - 1;
+            } else if (index >= images.length) {
+                currentIndex = 0;
+            } else {
+                currentIndex = index;
+            }
+            sliderImage.src = images[currentIndex];
+        }
+
+        function nextImage() {
+            showImage(currentIndex + 1);
+        }
+
+        function prevImage() {
+            showImage(currentIndex - 1);
+        }
+
+        // Initialize first image
+        showImage(currentIndex);
+    </script>
+
+</body>
+</html>
